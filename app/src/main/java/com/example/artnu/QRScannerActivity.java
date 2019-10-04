@@ -1,5 +1,6 @@
 package com.example.artnu;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -69,7 +70,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
     protected Size getDesiredPreviewFrameSize() {
         return new Size(640, 480);
     }
-
+    private AskCodeDialog codeDialog;
 
     private void scanBarcodes(FirebaseVisionImage image) {
         FirebaseVisionBarcodeDetectorOptions options =
@@ -94,20 +95,35 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
 
                             int valueType = barcode.getValueType();
                             // See API reference for complete list of supported types
-                            switch (valueType) {
-                                case FirebaseVisionBarcode.TYPE_TEXT:
+                            if (valueType == FirebaseVisionBarcode.TYPE_TEXT) {
+
                                     String displayValue = barcode.getDisplayValue();
                                     Toast.makeText(QRScannerActivity.this, displayValue, Toast.LENGTH_SHORT).show();
 
-                                    Painting painting = PaintingUtil.getPaintingForQrValueOrNull(displayValue);
+                                    final Painting painting = PaintingUtil.getPaintingForQrValueOrNull(displayValue);
                                     if (painting != null) {
-                                        PaintingUtil.setStatus(painting.getId(), PaintingUtil.STATUS.PARTIAL, getApplicationContext());
-                                        Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
-                                        intent.putExtra("Show_List", true);
-                                        startActivity(intent);
+                                        if (PaintingUtil.isUnlocked(painting.getId())) {
+                                            Toast.makeText(getApplicationContext(), "Already Unlocked, you think you can trick me ?", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            computing.set(true);
+                                            codeDialog = new AskCodeDialog(new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    String code = codeDialog.getText();
+                                                    if (PaintingUtil.codeMatch(painting, code)) {
+                                                        PaintingUtil.setStatus(painting.getId(), PaintingUtil.STATUS.UNLOCKED, getApplicationContext());
+                                                        Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
+                                                        intent.putExtra("Show_List", true);
+                                                        startActivity(intent);
+                                                    } else {
+                                                        Toast.makeText(getApplicationContext(), "Code incorrect! Try again later ;)", Toast.LENGTH_SHORT).show();
+                                                        computing.set(false);
+                                                    }
+                                                }
+                                            });
+                                            codeDialog.show(getSupportFragmentManager(), AskCodeDialog.TAG);
+                                        }
                                     }
-
-                                    break;
                             }
                         }
                     }

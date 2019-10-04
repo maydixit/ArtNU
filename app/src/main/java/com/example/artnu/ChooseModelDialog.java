@@ -8,11 +8,15 @@ import android.widget.ArrayAdapter;
 
 import androidx.fragment.app.DialogFragment;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ChooseModelDialog extends DialogFragment {
 
     public static final String TAG = ChooseModelDialog.class.getSimpleName();
 
     private int choice = 0;
+    private Map<Integer, Integer> indexToPaintingId = new HashMap<>();
     private DialogInterface.OnClickListener listener;
 
     public ChooseModelDialog(DialogInterface.OnClickListener listener) {
@@ -27,11 +31,22 @@ public class ChooseModelDialog extends DialogFragment {
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
 
+        int locked = 0;
+        int index = 0;
+        for (Painting painting: PaintingUtil.getPaintings()) {
+            if (PaintingUtil.isUnlocked(painting.getId())) {
+                arrayAdapter.add(painting.getPaintingName());
+                indexToPaintingId.put(index, painting.getId());
+                index++;
+            }
+            else {
+                locked++;
+            }
+        }
 
-
-        arrayAdapter.add("Unlocked");
-        arrayAdapter.add("Partially unlocked");
-        arrayAdapter.add("Locked");
+        if (locked > 0) {
+            arrayAdapter.add("?");
+        }
 
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -48,5 +63,11 @@ public class ChooseModelDialog extends DialogFragment {
 
     public int getChoice() {
         return choice;
+    }
+
+    public int getPaintingId(int index) {
+        if (indexToPaintingId.containsKey(index))
+        return indexToPaintingId.get(index);
+        return -1;
     }
 }

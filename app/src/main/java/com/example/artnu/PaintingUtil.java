@@ -31,9 +31,19 @@ public class PaintingUtil {
 
     private static Map<Integer, STATUS> statusMap = new HashMap<>();
 
+    public static boolean isUnlocked(Integer id) {
+        if (statusMap.containsKey(id)) {
+            return statusMap.get(id) == STATUS.UNLOCKED;
+        }
+        return false;
+    }
+
+    public static boolean codeMatch(Painting painting, String code) {
+        return painting.getCode().equals(code);
+    }
+
     enum STATUS {
         UNLOCKED,
-        PARTIAL,
         LOCKED
     }
 
@@ -62,12 +72,8 @@ public class PaintingUtil {
     }
 
     public static void setStatus(int id, STATUS status, Context context) {
-        for (int key : statusMap.keySet()) {
-            if (id == key) {
                 statusMap.put(id, status);
                 writeConfig(context);
-            }
-        }
     }
 
     private static void writeConfig(Context context) {
@@ -83,6 +89,7 @@ public class PaintingUtil {
     }
 
     static void readConfig(Context context) {
+        // TODO MAY if there is no file yet, create one with hardcoded values and write
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(context.openFileInput("config_artnu"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

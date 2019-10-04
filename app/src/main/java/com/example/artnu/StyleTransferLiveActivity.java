@@ -35,7 +35,6 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     private Button chooseModelBtn;
     private ChooseModelDialog imageSegDialog;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(1280, 720);
-    private AskCodeDialog codeDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,31 +44,12 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
         imageSegDialog = new ChooseModelDialog(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which) {
-                    case 0: // unlocked
-                        loadPredictor(which);
-                        break;
-                    case 1: // partially unlocked, needs code
-                        // todo Note here we will know the item, use this to figure out the code.
-                        codeDialog = new AskCodeDialog(new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String code = codeDialog.getText();
-                                // TODO match code here with the item!
-                                // if code is correct, save to storage as unlocked and call loadpredictor()
-                            }
-                        });
-                        codeDialog.show(getSupportFragmentManager(), AskCodeDialog.TAG);
-                        break;
-                    case 2: // locked
-                        startActivity(new Intent(getApplicationContext(), QRScannerActivity.class));
-                        break;
-                }
-                // Handle here what happens based on 'which'.
-                // if which is in the file of available values , choose that and load selector ?
-                // If not , go to QR reader ?
-                // TODO
 
+                if (PaintingUtil.isUnlocked(imageSegDialog.getPaintingId(which))) {
+                    loadPredictor(imageSegDialog.getPaintingId(which));
+                } else {
+                    startActivity(new Intent(getApplicationContext(), QRScannerActivity.class));
+                }
             }
         });
         if (getIntent().getBooleanExtra("Show_List", false)) {

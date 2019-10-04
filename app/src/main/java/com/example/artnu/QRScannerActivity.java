@@ -53,7 +53,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_qrscanner);
-
+        PaintingUtil.readConfig(getApplicationContext());
     }
 
     @Override
@@ -99,11 +99,9 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
                                     String displayValue = barcode.getDisplayValue();
                                     Toast.makeText(QRScannerActivity.this, displayValue, Toast.LENGTH_SHORT).show();
 
-                                    if (displayValue.equals("FOUND")) {
-                                        // TODO: Implement this with all possible options
-                                        // Unlock the value in storage
-
-                                        // Go back to style transfer activity
+                                    Painting painting = PaintingUtil.getPaintingForQrValueOrNull(displayValue);
+                                    if (painting != null) {
+                                        PaintingUtil.setStatus(painting.getId(), PaintingUtil.STATUS.PARTIAL, getApplicationContext());
                                         Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
                                         intent.putExtra("Show_List", true);
                                         startActivity(intent);

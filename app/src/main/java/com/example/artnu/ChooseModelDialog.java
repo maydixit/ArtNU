@@ -25,8 +25,9 @@ public class ChooseModelDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Available models ? ");
 
-
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
+
+
 
         arrayAdapter.add("Unlocked");
         arrayAdapter.add("Partially unlocked");

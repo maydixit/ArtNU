@@ -41,6 +41,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.style_transfer_camera);
+        PaintingUtil.readConfig(getApplicationContext());
         imageSegDialog = new ChooseModelDialog(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

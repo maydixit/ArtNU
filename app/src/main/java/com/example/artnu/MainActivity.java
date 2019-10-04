@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Fritz
         Fritz.configure(this, "5adfcdfd09604cf58e8a92e709d5c0d8");
 
+        PaintingUtil.readConfig(getApplicationContext());
         FloatingActionButton transformButton = findViewById(R.id.transform_button);
         transformButton.setOnClickListener(new View.OnClickListener() {
             @Override

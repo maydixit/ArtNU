@@ -29,7 +29,7 @@ public class PaintingUtil {
             new Painting(13, "", "", "renaissance19_13", ""),
             new Painting(14, "", "", "renaissance19_14", ""));
 
-    private static Map<String, STATUS> statusMap = new HashMap<>();
+    private static Map<Integer, STATUS> statusMap = new HashMap<>();
 
     enum STATUS {
         UNLOCKED,
@@ -41,7 +41,7 @@ public class PaintingUtil {
         return paintings;
     }
 
-    // write get methods to use this 
+    // write get methods to use this
 
     public static Painting getPaintingForQrValueOrNull(String qrCode) {
         for (Painting painting : paintings) {
@@ -61,28 +61,20 @@ public class PaintingUtil {
         return false;
     }
 
-    public void upgradeStatus(String paintingName, Context context) {
-        for (String name : statusMap.keySet()) {
-            if (paintingName.equals(name)) {
-                switch (statusMap.get(paintingName)) {
-                    case LOCKED:
-                        statusMap.put(paintingName, STATUS.PARTIAL);
-                        writeConfig(context);
-                        break;
-                    case PARTIAL:
-                        statusMap.put(paintingName, STATUS.UNLOCKED);
-                        writeConfig(context);
-                        break;
-                }
+    public static void setStatus(int id, STATUS status, Context context) {
+        for (int key : statusMap.keySet()) {
+            if (id == key) {
+                statusMap.put(id, status);
+                writeConfig(context);
             }
         }
     }
 
-    public static void writeConfig(Context context) {
+    private static void writeConfig(Context context) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("config_artnu", Context.MODE_PRIVATE));
-            for (String k : statusMap.keySet()) {
-                outputStreamWriter.write(k + "\t" + statusMap.get(k).name() + "\n");
+            for (int k : statusMap.keySet()) {
+                outputStreamWriter.write(String.valueOf(k) + "\t" + statusMap.get(k).name() + "\n");
             }
             outputStreamWriter.close();
         } catch (IOException e) {
@@ -90,7 +82,7 @@ public class PaintingUtil {
         }
     }
 
-    public static void readConfig(Context context) {
+    static void readConfig(Context context) {
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(context.openFileInput("config_artnu"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -98,11 +90,11 @@ public class PaintingUtil {
             statusMap = new HashMap<>();
             while ((receiveString = bufferedReader.readLine()) != null) {
                 String[] values = receiveString.split("\t");
-                statusMap.put(values[0], STATUS.valueOf(values[1]));
+                statusMap.put(Integer.valueOf(values[0]), STATUS.valueOf(values[1]));
             }
             inputStreamReader.close();
         } catch (IOException e) {
-            Log.e("Exception", "File write failed: " + e.toString());
+            Log.e("Exception", "File read failed: " + e.toString());
         }
     }
 }

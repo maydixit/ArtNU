@@ -19,6 +19,14 @@ public class Painting {
         return code;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getPainter() {
+        return painter;
+    }
+
     public Painting(Integer id, String name, String painter, String qrString, String code) {
         this.id = id;
         this.paintingName = name;

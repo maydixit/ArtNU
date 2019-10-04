@@ -13,9 +13,21 @@ import java.util.List;
 import java.util.Map;
 
 public class PaintingUtil {
-    private static List<Painting> paintings = Arrays.asList(new Painting("Name 1", "qr1", "code1"),
-            new Painting("Name2", "qr2", "code2"),
-            new Painting("name3", "qr3", "code3"));
+    private static List<Painting> paintings = Arrays.asList(
+            new Painting(1,"La Naissance de Vénus", "Botticelli", "renaissance19_01", "1485"),
+            new Painting(2, "La Méduse", "Caravage", "renaissance19_02", "1598"),
+            new Painting(3, "La Lippina", "Lippi", "renaissance19_03", "1465"),
+            new Painting(4, "Le Sacrifice d'Isaac", "Caravage", "renaissance19_04", "1603"),
+            new Painting(5, "Autumn", "Arcimboldo", "renaissance19_05", "1573"),
+            new Painting(6, "", "", "renaissance19_06", ""),
+            new Painting(7, "", "", "renaissance19_07", ""),
+            new Painting(8, "", "", "renaissance19_08", ""),
+            new Painting(9, "", "", "renaissance19_09", ""),
+            new Painting(10, "", "", "renaissance19_10", ""),
+            new Painting(11, "", "", "renaissance19_11", ""),
+            new Painting(12, "", "", "renaissance19_12", ""),
+            new Painting(13, "", "", "renaissance19_13", ""),
+            new Painting(14, "", "", "renaissance19_14", ""));
 
     private static Map<String, STATUS> statusMap = new HashMap<>();
 

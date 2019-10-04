@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1089273373709",
+    "firebase_url": "https://artnu-133c7.firebaseio.com",
+    "project_id": "artnu-133c7",
+    "storage_bucket": "artnu-133c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1089273373709:android:6adb3a7adf4cee52252144",
+        "android_client_info": {
+          "package_name": "com.example.artnu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1089273373709-i2appg024cutur33nohdhbi832re5k1n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3mv4y-h4eXQHBNXw4fjImOIDYfUZ4iqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1089273373709-i2appg024cutur33nohdhbi832re5k1n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

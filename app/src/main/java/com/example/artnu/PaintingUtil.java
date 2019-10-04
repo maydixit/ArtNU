@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class PaintingUtil {
     private static List<Painting> paintings = Arrays.asList(
-            new Painting(1,"La Naissance de Vénus", "Botticelli", "renaissance19_01", "1485"),
+            new Painting(0,"La Naissance de Vénus", "Botticelli", "renaissance19_01", "1485"),
             new Painting(2, "La Méduse", "Caravage", "renaissance19_02", "1598"),
             new Painting(3, "La Lippina", "Lippi", "renaissance19_03", "1465"),
             new Painting(4, "Le Sacrifice d'Isaac", "Caravage", "renaissance19_04", "1603"),
@@ -27,7 +27,7 @@ public class PaintingUtil {
             new Painting(11, "", "", "renaissance19_11", ""),
             new Painting(12, "", "", "renaissance19_12", ""),
             new Painting(13, "", "", "renaissance19_13", ""),
-            new Painting(14, "", "", "renaissance19_14", ""));
+            new Painting(1, "", "", "renaissance19_14", ""));
 
     private static Map<Integer, STATUS> statusMap = new HashMap<>();
 
@@ -89,7 +89,7 @@ public class PaintingUtil {
     }
 
     static void readConfig(Context context) {
-        // TODO MAY if there is no file yet, create one with hardcoded values and write
+        // check if read nad write are fine without comfirming every time todo
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(context.openFileInput("config_artnu"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
@@ -100,6 +100,9 @@ public class PaintingUtil {
                 statusMap.put(Integer.valueOf(values[0]), STATUS.valueOf(values[1]));
             }
             inputStreamReader.close();
+            if (statusMap.size() == 0) {
+                statusMap.put(0, STATUS.UNLOCKED);
+            }
         } catch (IOException e) {
             Log.e("Exception", "File read failed: " + e.toString());
         }

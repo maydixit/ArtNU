@@ -47,7 +47,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class QRScannerActivity extends CameraActivity implements ImageReader.OnImageAvailableListener {
     private static final String TAG = QRScannerActivity.class.getSimpleName();
-    private boolean threed;
 
 
     @Override
@@ -55,7 +54,6 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_qrscanner);
         PaintingUtil.readConfig(getApplicationContext());
-        threed = getIntent().getBooleanExtra("RunIn3D", false);
     }
 
     @Override
@@ -115,7 +113,6 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
                                                         PaintingUtil.setStatus(painting.getId(), PaintingUtil.STATUS.UNLOCKED, getApplicationContext());
                                                         Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
                                                         intent.putExtra("Show_List", true);
-                                                        intent.putExtra("RunIn3D", threed);
                                                         startActivity(intent);
                                                     } else {
                                                         Toast.makeText(getApplicationContext(), "Code incorrect! Try again later ;)", Toast.LENGTH_SHORT).show();

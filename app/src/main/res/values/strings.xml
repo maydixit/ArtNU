@@ -16,4 +16,22 @@
     <string name="title_activity_qrscanner">QRScannerActivity</string>
     <string name="camera_error">Camera error</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="threed_header">What is this 3D? Hm.!</string>
+    <string name="threed_text">Enable 3D</string>
 </resources>

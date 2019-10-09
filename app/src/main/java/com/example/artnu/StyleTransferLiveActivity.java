@@ -2,6 +2,7 @@ package com.example.artnu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -55,7 +57,6 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                     loadPredictor(imageSegDialog.getPaintingId(which));
                 } else {
                     Intent intent = new Intent(getApplicationContext(), QRScannerActivity.class);
-                    intent.putExtra("RunIn3D", threed);
                     startActivity(intent);
                 }
             }
@@ -63,9 +64,9 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
         if (getIntent().getBooleanExtra("Show_List", false)) {
             imageSegDialog.show(getSupportFragmentManager(), ChooseModelDialog.TAG);
         }
-        if (getIntent().getBooleanExtra("RunIn3D", false)) {
-            this.threed = true;
-        }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        threed = prefs.getBoolean("threed_choice", true);
 
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.style_transfer_layout);
         layout.setOnLongClickListener(new View.OnLongClickListener() {

@@ -49,7 +49,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
             public void onClick(DialogInterface dialog, int which) {
 
                 if (PaintingUtil.isUnlocked(imageSegDialog.getPaintingId(which))) {
-                    PaintingUtil.writeChoice(imageSegDialog.getPaintingId(which));
+                    choice = imageSegDialog.getPaintingId(which);
                     loadPredictor(imageSegDialog.getPaintingId(which));
                 } else {
                     Intent intent = new Intent(getApplicationContext(), QRScannerActivity.class);
@@ -74,7 +74,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     protected void onPreviewSizeChosen(final Size previewSize, final Size cameraViewSize, int rotation) {
         imageRotation = FritzVisionOrientation.getImageRotationFromCamera(this, getCameraId());
         if (choice == -1) {
-            choice = PaintingUtil.readChoice();
+            choice = PaintingUtil.readChoice(getApplicationContext());
         }
         loadPredictor(choice);
         final Size drawSize = threed ? new Size(cameraViewSize.getWidth(), cameraViewSize.getHeight()/2) : cameraViewSize;
@@ -126,6 +126,12 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
 
             Log.i(TAG, "Done drawing");
         }
+    }
+
+    @Override
+    public void onPause() {
+        PaintingUtil.writeChoice(getApplicationContext(), choice);
+        super.onPause();
     }
 
     @Override

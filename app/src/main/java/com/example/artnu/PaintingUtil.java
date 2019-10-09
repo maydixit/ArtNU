@@ -91,15 +91,14 @@ public class PaintingUtil {
     static void readConfig(Context context) {
         // check if read nad write are fine without comfirming every time todo
         try {
-            InputStreamReader inputStreamReader = new InputStreamReader(context.openFileInput("config_artnu"));
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput("config_artnu")));
             String receiveString = "";
             statusMap = new HashMap<>();
             while ((receiveString = bufferedReader.readLine()) != null) {
                 String[] values = receiveString.split("\t");
                 statusMap.put(Integer.valueOf(values[0]), STATUS.valueOf(values[1]));
             }
-            inputStreamReader.close();
+            bufferedReader.close();
             if (statusMap.size() == 0) {
                 statusMap.put(0, STATUS.UNLOCKED);
             }
@@ -108,11 +107,35 @@ public class PaintingUtil {
         }
     }
 
-    static void writeChoice(int choice) {
-
+    static void writeChoice(Context context, int choice) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("choice_artnu", Context.MODE_PRIVATE));
+            outputStreamWriter.write(String.valueOf(choice));
+            outputStreamWriter.close();
+        } catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
     }
 
-    static int readChoice() {
-        return -1;
+    static int readChoice(Context context) {
+        int choice = 0;
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput("choice_artnu")));
+            String receiveString = "";
+
+            while ((receiveString = bufferedReader.readLine()) != null) {
+                try {
+                    choice = Integer.parseInt(receiveString);
+                }
+                catch (Exception e) {
+                    
+                }
+            }
+            bufferedReader.close();
+
+        } catch (IOException e) {
+            Log.e("Exception", "File read failed: " + e.toString());
+        }
+        return choice;
     }
 }

@@ -24,7 +24,7 @@ public class AskCodeDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Enter code");
+        builder.setTitle("When was this made?");
 
         input = new EditText(getContext());
         input.setInputType(InputType.TYPE_CLASS_TEXT);

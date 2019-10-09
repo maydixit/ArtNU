@@ -147,7 +147,8 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
 
     @Override
     public void onImageAvailable(ImageReader reader) {
-        final Image image = reader.acquireLatestImage();
+        final Image image = reader.acquireNextImage();
+
         if (image == null) {
             return;
         }

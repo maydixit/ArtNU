@@ -141,7 +141,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
 
     @Override
     public void onImageAvailable(ImageReader reader) {
-        final Image image = reader.acquireLatestImage();
+        final Image image = reader.acquireNextImage();
 
         if (image == null) {
             return;

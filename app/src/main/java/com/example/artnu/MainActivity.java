@@ -3,6 +3,7 @@ package com.example.artnu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Fritz.configure(this, "5adfcdfd09604cf58e8a92e709d5c0d8");
 
         PaintingUtil.readConfig(getApplicationContext());
-        ImageButton transformButton = findViewById(R.id.transform_button);
+        Button transformButton = findViewById(R.id.transform_button);
         transformButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -2,6 +2,7 @@ package com.example.artnu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.Image;
@@ -52,6 +53,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.content_qrscanner);
         PaintingUtil.readConfig(getApplicationContext());
     }

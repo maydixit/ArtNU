@@ -18,6 +18,7 @@ package com.example.artnu;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -65,6 +66,7 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
   protected void onCreate(final Bundle savedInstanceState) {
     super.onCreate(null);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
     setContentView(R.layout.activity_camera);
 

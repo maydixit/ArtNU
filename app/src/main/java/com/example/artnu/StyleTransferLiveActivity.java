@@ -3,6 +3,7 @@ package com.example.artnu;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.RectF;
@@ -47,6 +48,8 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.style_transfer_camera);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         PaintingUtil.readConfig(getApplicationContext());
         imageSegDialog = new ChooseModelDialog(new DialogInterface.OnClickListener() {
             @Override

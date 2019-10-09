@@ -126,9 +126,9 @@ public class PaintingUtil {
             while ((receiveString = bufferedReader.readLine()) != null) {
                 try {
                     choice = Integer.parseInt(receiveString);
+                    if (choice < 0) choice = 0;
                 }
                 catch (Exception e) {
-                    
                 }
             }
             bufferedReader.close();

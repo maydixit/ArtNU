@@ -8,9 +8,11 @@ import android.graphics.RectF;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Size;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -64,6 +66,17 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
         if (getIntent().getBooleanExtra("RunIn3D", false)) {
             this.threed = true;
         }
+
+        ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.style_transfer_layout);
+        layout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ImageUtil.SaveImage(getApplicationContext(), resultImage);
+                Toast.makeText(getApplicationContext(), "Picture Captured :)", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
     }
 
     protected Size getDesiredPreviewFrameSize() {
@@ -115,7 +128,6 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     }
 
     protected void handleDrawingResult(Canvas canvas, Size cameraSize) {
-        Log.i(TAG, "In handle drawing result");
         if (resultImage != null) {
             if (threed) {
                 canvas.drawBitmap(resultImage, null, new RectF(0, 0, cameraSize.getWidth(), cameraSize.getHeight()), null);
@@ -124,7 +136,6 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                 canvas.drawBitmap(resultImage, null, new RectF(0, 0, cameraSize.getWidth(), cameraSize.getHeight()), null);
             }
 
-            Log.i(TAG, "Done drawing");
         }
     }
 
@@ -137,7 +148,6 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     @Override
     public void onImageAvailable(ImageReader reader) {
         final Image image = reader.acquireLatestImage();
-
         if (image == null) {
             return;
         }

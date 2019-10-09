@@ -66,7 +66,6 @@ import java.util.concurrent.TimeUnit;
 
 
 public class CameraConnectionFragment extends Fragment {
-  private static final Logger LOGGER = new Logger();
 
   /**
    * The camera preview size will be chosen to be the smallest frame by pixel size capable of
@@ -297,22 +296,16 @@ public class CameraConnectionFragment extends Fragment {
       }
     }
 
-    LOGGER.i("Desired size: " + desiredSize + ", min size: " + minSize + "x" + minSize);
-    LOGGER.i("Valid preview sizes: [" + TextUtils.join(", ", bigEnough) + "]");
-    LOGGER.i("Rejected preview sizes: [" + TextUtils.join(", ", tooSmall) + "]");
 
     if (exactSizeFound) {
-      LOGGER.i("Exact size match found.");
       return desiredSize;
     }
 
     // Pick the smallest of those, assuming we found any
     if (bigEnough.size() > 0) {
       final Size chosenSize = Collections.min(bigEnough, new CompareSizesByArea());
-      LOGGER.i("Chosen size: " + chosenSize.getWidth() + "x" + chosenSize.getHeight());
       return chosenSize;
     } else {
-      LOGGER.e("Couldn't find any suitable preview size");
       return choices[0];
     }
   }
@@ -418,7 +411,6 @@ public class CameraConnectionFragment extends Fragment {
         CameraConnectionFragment.this.cameraId = cameraId;
       }
     } catch (final CameraAccessException e) {
-      LOGGER.e(e, "Exception!");
     } catch (final NullPointerException e) {
       // Currently an NPE is thrown when the Camera2API is used but not supported on the
       // device this code runs.
@@ -448,7 +440,6 @@ public class CameraConnectionFragment extends Fragment {
 
       manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (final CameraAccessException e) {
-      LOGGER.e(e, "Exception!");
     } catch (final InterruptedException e) {
       throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
     }
@@ -498,7 +489,6 @@ public class CameraConnectionFragment extends Fragment {
       backgroundThread = null;
       backgroundHandler = null;
     } catch (final InterruptedException e) {
-      LOGGER.e(e, "Exception!");
     }
   }
 
@@ -535,7 +525,6 @@ public class CameraConnectionFragment extends Fragment {
       previewRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
       previewRequestBuilder.addTarget(surface);
 
-      LOGGER.i("Opening camera preview: " + previewSize.getWidth() + "x" + previewSize.getHeight());
 
       // Create the reader for the preview frames.
       previewReader =
@@ -573,7 +562,6 @@ public class CameraConnectionFragment extends Fragment {
                 captureSession.setRepeatingRequest(
                     previewRequest, captureCallback, backgroundHandler);
               } catch (final CameraAccessException e) {
-                LOGGER.e(e, "Exception!");
               }
             }
 
@@ -584,7 +572,6 @@ public class CameraConnectionFragment extends Fragment {
           },
           null);
     } catch (final CameraAccessException e) {
-      LOGGER.e(e, "Exception!");
     }
   }
 

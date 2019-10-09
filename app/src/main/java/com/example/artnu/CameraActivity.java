@@ -44,7 +44,6 @@ import java.nio.ByteBuffer;
 
 public abstract class CameraActivity extends AppCompatActivity implements OnImageAvailableListener {
   private static final String TAG = "CameraActivity";
-  private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
 
@@ -64,7 +63,6 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
 
   @Override
   protected void onCreate(final Bundle savedInstanceState) {
-    LOGGER.d("onCreate " + this);
     super.onCreate(null);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -79,13 +77,11 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
 
   @Override
   public synchronized void onStart() {
-    LOGGER.d("onStart " + this);
     super.onStart();
   }
 
   @Override
   public synchronized void onResume() {
-    LOGGER.d("onResume " + this);
     super.onResume();
 
     handlerThread = new HandlerThread("inference");
@@ -95,10 +91,8 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
 
   @Override
   public synchronized void onPause() {
-    LOGGER.d("onPause " + this);
 
     if (!isFinishing()) {
-      LOGGER.d("Requesting finish");
       finish();
     }
 
@@ -108,7 +102,6 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
       handlerThread = null;
       handler = null;
     } catch (final InterruptedException e) {
-      LOGGER.e( "Exception!");
     }
 
     super.onPause();
@@ -116,13 +109,11 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
 
   @Override
   public synchronized void onStop() {
-    LOGGER.d("onStop " + this);
     super.onStop();
   }
 
   @Override
   public synchronized void onDestroy() {
-    LOGGER.d("onDestroy " + this);
     super.onDestroy();
   }
 
@@ -212,7 +203,6 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
         useCamera2API = (facing == CameraCharacteristics.LENS_FACING_EXTERNAL)
                 || isHardwareLevelSupported(characteristics,
                 CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_FULL);
-        Log.i(TAG, "Camera API lv2?: " + useCamera2API);
         return cameraId;
       }
     } catch (CameraAccessException e) {
@@ -240,7 +230,6 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
     for (int i = 0; i < planes.length; ++i) {
       final ByteBuffer buffer = planes[i].getBuffer();
       if (yuvBytes[i] == null) {
-        LOGGER.e("Initializing buffer %d at size %d", i, buffer.capacity());
         yuvBytes[i] = new byte[buffer.capacity()];
       }
       buffer.get(yuvBytes[i]);

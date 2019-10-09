@@ -30,5 +30,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), StyleTransferLiveActivity.class));
             }
         });
+
+        FloatingActionButton threed = findViewById(R.id.threed_button);
+        threed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
+                intent.putExtra("RunIn3D", true);
+                startActivity(intent);
+            }
+        });
     }
 }

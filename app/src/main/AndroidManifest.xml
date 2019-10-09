@@ -38,8 +38,7 @@
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="barcode" />
-        <!-- Register the custom model service for OTA model updates -->
+            android:value="barcode" /> <!-- Register the custom model service for OTA model updates -->
         <service
             android:name="ai.fritz.core.FritzCustomModelService"
             android:exported="true"

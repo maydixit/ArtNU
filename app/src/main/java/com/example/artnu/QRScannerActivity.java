@@ -2,7 +2,6 @@ package com.example.artnu;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.Image;
@@ -48,13 +47,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class QRScannerActivity extends CameraActivity implements ImageReader.OnImageAvailableListener {
     private static final String TAG = QRScannerActivity.class.getSimpleName();
-    private Bitmap resultImage;
+    private boolean threed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_qrscanner);
         PaintingUtil.readConfig(getApplicationContext());
+        threed = getIntent().getBooleanExtra("RunIn3D", false);
     }
 
     @Override
@@ -114,6 +115,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
                                                         PaintingUtil.setStatus(painting.getId(), PaintingUtil.STATUS.UNLOCKED, getApplicationContext());
                                                         Intent intent = new Intent(getApplicationContext(), StyleTransferLiveActivity.class);
                                                         intent.putExtra("Show_List", true);
+                                                        intent.putExtra("RunIn3D", threed);
                                                         startActivity(intent);
                                                     } else {
                                                         Toast.makeText(getApplicationContext(), "Code incorrect! Try again later ;)", Toast.LENGTH_SHORT).show();

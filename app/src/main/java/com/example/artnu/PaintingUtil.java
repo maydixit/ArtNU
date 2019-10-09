@@ -107,4 +107,12 @@ public class PaintingUtil {
             Log.e("Exception", "File read failed: " + e.toString());
         }
     }
+
+    static void writeChoice(int choice) {
+
+    }
+
+    static int readChoice() {
+        return -1;
+    }
 }

@@ -11,7 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
 import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -32,9 +33,11 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     private Bitmap resultImage;
     private FritzVisionStylePredictor predictor;
     private ImageRotation imageRotation;
-    private Button chooseModelBtn;
+    private FloatingActionButton chooseModelBtn;
     private ChooseModelDialog imageSegDialog;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(1280, 720);
+    private boolean threed = false;
+    private int choice = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,20 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
             public void onClick(DialogInterface dialog, int which) {
 
                 if (PaintingUtil.isUnlocked(imageSegDialog.getPaintingId(which))) {
+                    PaintingUtil.writeChoice(imageSegDialog.getPaintingId(which));
                     loadPredictor(imageSegDialog.getPaintingId(which));
                 } else {
-                    startActivity(new Intent(getApplicationContext(), QRScannerActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), QRScannerActivity.class);
+                    intent.putExtra("RunIn3D", threed);
+                    startActivity(intent);
                 }
             }
         });
         if (getIntent().getBooleanExtra("Show_List", false)) {
             imageSegDialog.show(getSupportFragmentManager(), ChooseModelDialog.TAG);
+        }
+        if (getIntent().getBooleanExtra("RunIn3D", false)) {
+            this.threed = true;
         }
     }
 
@@ -64,17 +73,21 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     @Override
     protected void onPreviewSizeChosen(final Size previewSize, final Size cameraViewSize, int rotation) {
         imageRotation = FritzVisionOrientation.getImageRotationFromCamera(this, getCameraId());
-        loadPredictor(0);
+        if (choice == -1) {
+            choice = PaintingUtil.readChoice();
+        }
+        loadPredictor(choice);
+        final Size drawSize = threed ? new Size(cameraViewSize.getWidth(), cameraViewSize.getHeight()/2) : cameraViewSize;
         addCallback(
                 new OverlayView.DrawCallback() {
                     @Override
                     public void drawCallback(final Canvas canvas) {
-                        handleDrawingResult(canvas, cameraViewSize);
+                        handleDrawingResult(canvas, drawSize);
                     }
                 });
 
 
-        chooseModelBtn = (Button) findViewById(R.id.list_button);
+        chooseModelBtn = (FloatingActionButton) findViewById(R.id.list_button);
         chooseModelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +117,13 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     protected void handleDrawingResult(Canvas canvas, Size cameraSize) {
         Log.i(TAG, "In handle drawing result");
         if (resultImage != null) {
-            canvas.drawBitmap(resultImage, null, new RectF(0, 0, cameraSize.getWidth(), cameraSize.getHeight()), null);
+            if (threed) {
+                canvas.drawBitmap(resultImage, null, new RectF(0, 0, cameraSize.getWidth(), cameraSize.getHeight()), null);
+                canvas.drawBitmap(resultImage, null, new RectF(0, cameraSize.getHeight(), cameraSize.getWidth(), cameraSize.getHeight()*2), null);
+            } else {
+                canvas.drawBitmap(resultImage, null, new RectF(0, 0, cameraSize.getWidth(), cameraSize.getHeight()), null);
+            }
+
             Log.i(TAG, "Done drawing");
         }
     }

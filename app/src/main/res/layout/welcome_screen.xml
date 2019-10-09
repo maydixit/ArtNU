@@ -4,15 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/universe">
+    android:background="@color/cardview_dark_background">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/transform_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        app:srcCompat="@drawable/circle_empty"
-        android:layout_gravity="center"
         android:focusable="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -22,31 +20,29 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/settings_button"
-        android:layout_width="36dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/transform_button"
         android:layout_centerHorizontal="true"
-        android:layout_gravity="end"
         android:layout_marginTop="10dp"
         android:clickable="true"
         android:focusable="true"
-        app:srcCompat="@android:drawable/ic_menu_more"
+        app:backgroundTint="@android:color/transparent"
         android:src="@drawable/settings" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/threed_button"
-        android:layout_width="36dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_above="@id/transform_button"
-        android:layout_gravity="end"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="18dp"
         android:clickable="true"
         android:layout_centerHorizontal="true"
         android:focusable="true"
-        app:srcCompat="@android:drawable/ic_menu_more"
-        android:src="@drawable/threed" />
+        android:src="@drawable/threed"
+        app:backgroundTint="@android:color/transparent"/>
 
 
 </RelativeLayout>

@@ -6,17 +6,25 @@
     android:layout_height="match_parent"
     android:background="@color/cardview_dark_background">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    
+
+    <ImageButton
         android:id="@+id/transform_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="165dp"
+        android:layout_height="218dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="100dp"
+        android:adjustViewBounds="true"
         android:clickable="true"
         android:focusable="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:backgroundTint="@android:color/transparent"
-        android:src="@drawable/transform" />
-
+        android:scaleType="centerCrop"
+        android:src="@drawable/godfinger"
+        app:backgroundTint="#C9C8A9" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/settings_button"
@@ -28,21 +36,8 @@
         android:clickable="true"
         android:focusable="true"
         app:backgroundTint="@android:color/transparent"
-        android:src="@drawable/settings" />
+        />
 
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/threed_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/transform_button"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="18dp"
-        android:clickable="true"
-        android:layout_centerHorizontal="true"
-        android:focusable="true"
-        android:src="@drawable/threed"
-        app:backgroundTint="@android:color/transparent"/>
 
 
 </RelativeLayout>

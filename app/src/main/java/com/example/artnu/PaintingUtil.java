@@ -89,21 +89,20 @@ public class PaintingUtil {
     }
 
     static void readConfig(Context context) {
-        // check if read nad write are fine without comfirming every time todo
+        statusMap = new HashMap<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput("config_artnu")));
             String receiveString = "";
-            statusMap = new HashMap<>();
             while ((receiveString = bufferedReader.readLine()) != null) {
                 String[] values = receiveString.split("\t");
                 statusMap.put(Integer.valueOf(values[0]), STATUS.valueOf(values[1]));
             }
             bufferedReader.close();
-            if (statusMap.size() == 0) {
-                statusMap.put(0, STATUS.UNLOCKED);
-            }
         } catch (IOException e) {
             Log.e("Exception", "File read failed: " + e.toString());
+        }
+        if (statusMap.size() == 0) {
+            statusMap.put(0, STATUS.UNLOCKED);
         }
     }
 

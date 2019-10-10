@@ -27,7 +27,7 @@ public class ChooseModelDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Available models ? ");
+        builder.setTitle("Paintings");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.select_dialog_singlechoice);
 
@@ -45,7 +45,7 @@ public class ChooseModelDialog extends DialogFragment {
         }
 
         if (locked > 0) {
-            arrayAdapter.add("?");
+            arrayAdapter.add("> Unlock new painting");
         }
 
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {

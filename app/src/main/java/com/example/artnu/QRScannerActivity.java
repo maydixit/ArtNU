@@ -55,6 +55,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.content_qrscanner);
+        Toast.makeText(getApplicationContext(), "Scan QR Code", Toast.LENGTH_SHORT).show();
         PaintingUtil.readConfig(getApplicationContext());
     }
 

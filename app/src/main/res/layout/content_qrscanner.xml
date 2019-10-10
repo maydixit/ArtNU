@@ -9,19 +9,6 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.artnu.QRScannerActivity" >
-
-        <TextView
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:ems="10"
-            android:text="Scan QR Code"
-            android:textAlignment="center"
-            android:textColor="#161616"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+        tools:context="com.example.artnu.QRScannerActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

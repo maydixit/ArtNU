@@ -105,6 +105,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
                                     if (painting != null) {
                                         if (PaintingUtil.isUnlocked(painting.getId())) {
                                             Toast.makeText(getApplicationContext(), "Already Unlocked, you think you can trick me ?", Toast.LENGTH_SHORT).show();
+                                            computing.set(true);
                                         } else {
                                             computing.set(true);
                                             codeDialog = new AskCodeDialog(new DialogInterface.OnClickListener() {

@@ -99,7 +99,7 @@ public class QRScannerActivity extends CameraActivity implements ImageReader.OnI
                             if (valueType == FirebaseVisionBarcode.TYPE_TEXT) {
 
                                     String displayValue = barcode.getDisplayValue();
-                                    Toast.makeText(QRScannerActivity.this, displayValue, Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(QRScannerActivity.this, displayValue, Toast.LENGTH_SHORT).show();
 
                                     final Painting painting = PaintingUtil.getPaintingForQrValueOrNull(displayValue);
                                     if (painting != null) {

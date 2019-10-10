@@ -38,8 +38,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.artnu.env.Logger;
-
 import java.nio.ByteBuffer;
 
 
@@ -70,7 +68,7 @@ public abstract class CameraActivity extends AppCompatActivity implements OnImag
 
     setContentView(R.layout.activity_camera);
 
-    if (hasPermission()) {
+    if (Build.VERSION.SDK_INT <= 22 || hasPermission()) {
       setFragment();
     } else {
       requestPermission();

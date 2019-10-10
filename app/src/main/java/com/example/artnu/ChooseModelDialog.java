@@ -45,7 +45,7 @@ public class ChooseModelDialog extends DialogFragment {
         }
 
         if (locked > 0) {
-            arrayAdapter.add("> Unlock new painting");
+            arrayAdapter.add("Unlock New Painting");
         }
 
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {

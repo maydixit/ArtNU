@@ -69,7 +69,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        threed = prefs.getBoolean("threed_choice", true);
+        threed = prefs.getBoolean("threed_choice", false);
 
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.style_transfer_layout);
         layout.setOnLongClickListener(new View.OnLongClickListener() {

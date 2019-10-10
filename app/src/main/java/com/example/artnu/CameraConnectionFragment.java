@@ -45,6 +45,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -96,6 +97,7 @@ public class CameraConnectionFragment extends Fragment {
             public void onSurfaceTextureAvailable(
                     final SurfaceTexture texture, final int width, final int height) {
               openCamera(width, height);
+              Log.e("Exception", "after first openCamera");
             }
 
             @Override
@@ -348,6 +350,7 @@ public class CameraConnectionFragment extends Fragment {
     } else {
       textureView.setSurfaceTextureListener(surfaceTextureListener);
     }
+    Log.e("Exception", "after onResume");
   }
 
   @Override
@@ -423,6 +426,7 @@ public class CameraConnectionFragment extends Fragment {
     Size textureViewSize = new Size(textureView.getWidth(), textureView.getHeight());
 
     cameraConnectionCallback.onPreviewSizeChosen(previewSize, textureViewSize, sensorOrientation);
+    Log.e("Exception", "end setup camera");
   }
 
   /**
@@ -431,18 +435,21 @@ public class CameraConnectionFragment extends Fragment {
   private void openCamera(final int width, final int height) {
     setUpCameraOutputs(width, height);
     configureTransform(width, height);
+    Log.e("Exception", "after ConfigureTransform");
     final Activity activity = getActivity();
     final CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
     try {
       if (!cameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
         throw new RuntimeException("Time out waiting to lock camera opening.");
       }
+      Log.e("Exception", "after acquire");
 
       manager.openCamera(cameraId, stateCallback, backgroundHandler);
     } catch (final CameraAccessException e) {
     } catch (final InterruptedException e) {
       throw new RuntimeException("Interrupted while trying to lock camera opening.", e);
     }
+    Log.e("Exception", "after openCamera");
   }
 
   /**

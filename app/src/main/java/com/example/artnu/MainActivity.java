@@ -3,6 +3,7 @@ package com.example.artnu;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Fritz
         Fritz.configure(this, "5adfcdfd09604cf58e8a92e709d5c0d8");
 
+
+        Log.e("Exception", "LA LA 1");
         PaintingUtil.readConfig(getApplicationContext());
         Button transformButton = findViewById(R.id.transform_button);
         transformButton.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        Log.e("Exception", "LA LA 2");
+
         FloatingActionButton settings = findViewById(R.id.settings_button);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Log.e("Exception", "LA LA 3");
 
 
     }

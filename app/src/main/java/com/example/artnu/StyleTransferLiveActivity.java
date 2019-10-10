@@ -10,6 +10,7 @@ import android.graphics.RectF;
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.Toast;
@@ -51,6 +52,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         PaintingUtil.readConfig(getApplicationContext());
+        Log.e("Exception", "GET HERE 1");
         imageSegDialog = new ChooseModelDialog(new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -64,6 +66,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                 }
             }
         });
+        Log.e("Exception", "GET HERE 2");
         if (getIntent().getBooleanExtra("Show_List", false)) {
             imageSegDialog.show(getSupportFragmentManager(), ChooseModelDialog.TAG);
         }
@@ -80,6 +83,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                 return true;
             }
         });
+        Log.e("Exception", "GET HERE 3");
 
     }
 
@@ -94,6 +98,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
             choice = PaintingUtil.readChoice(getApplicationContext());
         }
         loadPredictor(choice);
+        Log.e("Exception", "after loading predictor ");
         final Size drawSize = threed ? new Size(cameraViewSize.getWidth(), cameraViewSize.getHeight()/2) : cameraViewSize;
         addCallback(
                 new OverlayView.DrawCallback() {
@@ -104,6 +109,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                 });
 
 
+        Log.e("Exception", "before listener");
         chooseModelBtn = (FloatingActionButton) findViewById(R.id.list_button);
         chooseModelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,13 +117,16 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
                 imageSegDialog.show(getSupportFragmentManager(), ChooseModelDialog.TAG);
             }
         });
+        Log.e("Exception", "after listener");
 
     }
 
     private void loadPredictor(int choice) {
         FritzOnDeviceModel onDeviceModel = getModel(choice);
         FritzVisionStylePredictorOptions options = new FritzVisionStylePredictorOptions();
+        Log.e("Exception", "before predictor ");
         predictor = FritzVision.StyleTransfer.getPredictor(onDeviceModel, options);
+        Log.e("Exception", "after predictor ");
 
     }
 
@@ -127,6 +136,7 @@ public class StyleTransferLiveActivity extends CameraActivity  implements ImageR
     }
 
     private FritzOnDeviceModel getModel(int choice) {
+        Log.e("Exception", "choice " + choice);
         FritzOnDeviceModel[] styles = PaintingStyles.getAll();
         return styles[choice];
     }

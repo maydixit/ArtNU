@@ -14,20 +14,23 @@ import java.util.Map;
 
 public class PaintingUtil {
     private static List<Painting> paintings = Arrays.asList(
-            new Painting(0,"La Naissance de Vénus", "Botticelli", "renaissance19_01", "1485"),
-            new Painting(2, "La Méduse", "Caravage", "renaissance19_02", "1598"),
-            new Painting(3, "La Lippina", "Lippi", "renaissance19_03", "1465"),
-            new Painting(4, "Le Sacrifice d'Isaac", "Caravage", "renaissance19_04", "1603"),
-            new Painting(5, "Autumn", "Arcimboldo", "renaissance19_05", "1573"),
-            new Painting(6, "", "", "renaissance19_06", ""),
-            new Painting(7, "", "", "renaissance19_07", ""),
-            new Painting(8, "", "", "renaissance19_08", ""),
-            new Painting(9, "", "", "renaissance19_09", ""),
-            new Painting(10, "", "", "renaissance19_10", ""),
-            new Painting(11, "", "", "renaissance19_11", ""),
-            new Painting(12, "", "", "renaissance19_12", ""),
-            new Painting(13, "", "", "renaissance19_13", ""),
-            new Painting(1, "", "", "renaissance19_14", ""));
+            new Painting(0,"Bicentennial Print", "Roy Lichtenstein", "renaissance19_00", "1975"),
+            new Painting(1,"Les Femmes d'Alger", "Pablo Picasso", "renaissance19_01", "1955"),
+            new Painting(2,"Tête de Clown", "Joseph Kutter", "renaissance19_02", "1937"),
+            new Painting(3,"Cavalli in riva al mare", "Giorgio de Chirico", "renaissance19_03", "1928"),
+            new Painting(4,"Kaleidoscope", "none", "renaissance19_04", "2019"),
+            new Painting(5,"Losanges", "none", "renaissance19_05", "2019"),
+            new Painting(6,"Coquelicots", "Claude Monet", "renaissance19_06", "1873"),
+            new Painting(7,"Ritmo Plastico", "Gino Severini", "renaissance19_07", "1913"),
+            new Painting(8,"Starry Night", "Vincent Van Gogh", "renaissance19_08", "1889"),
+            new Painting(9,"Der Schrei der Natur", "Edvard Munch", "renaissance19_09", "1893"),
+            new Painting(10,"The Trial", "Sidney Nolan", "renaissance19_10", "1947"),
+
+            new Painting(101,"La Naissance de Vénus", "Botticelli", "renaissance19_101", "1485"),
+            new Painting(102, "La Méduse", "Caravage", "renaissance19_102", "1598"),
+            new Painting(103, "La Lippina", "Lippi", "renaissance19_103", "1465"),
+            new Painting(104, "Le Sacrifice d'Isaac", "Caravage", "renaissance19_104", "1603"),
+            new Painting(105, "Autumn", "Arcimboldo", "renaissance19_105", "1573"));
 
     private static Map<Integer, STATUS> statusMap = new HashMap<>();
 

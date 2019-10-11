@@ -11,11 +11,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class PaintingUtil {
-    private static List<Integer> FIRST_CHOICE_LIST = Arrays.asList(1, 2, 3, 6, 8, 9);
-
     private static List<Painting> paintings = Arrays.asList(
             new Painting(0,"1. Bicentennial Print", "Roy Lichtenstein", "renaissance19_00", "1975"),
             new Painting(1,"2. Les Femmes d'Alger", "Pablo Picasso", "renaissance19_01", "1955"),
@@ -108,7 +105,7 @@ public class PaintingUtil {
             Log.e("Exception", "File read failed: " + e.toString());
         }
         if (statusMap.size() == 0) {
-            statusMap.put(FIRST_CHOICE_LIST.get(new Random().nextInt(FIRST_CHOICE_LIST.size())), STATUS.UNLOCKED);
+            statusMap.put(0, STATUS.UNLOCKED);
         }
     }
 

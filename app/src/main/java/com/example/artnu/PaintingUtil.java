@@ -17,17 +17,17 @@ public class PaintingUtil {
     private static List<Integer> FIRST_CHOICE_LIST = Arrays.asList(1, 2, 3, 6, 8, 9);
 
     private static List<Painting> paintings = Arrays.asList(
-            new Painting(0,"Bicentennial Print", "Roy Lichtenstein", "renaissance19_00", "1975"),
-            new Painting(1,"Les Femmes d'Alger", "Pablo Picasso", "renaissance19_01", "1955"),
-            new Painting(2,"Tête de Clown", "Joseph Kutter", "renaissance19_02", "1937"),
-            new Painting(3,"Cavalli in riva al mare", "Giorgio de Chirico", "renaissance19_03", "1928"),
-            new Painting(4,"Kaleidoscope", "none", "renaissance19_04", "2019"),
-            new Painting(5,"Losanges", "none", "renaissance19_05", "2019"),
-            new Painting(6,"Coquelicots", "Claude Monet", "renaissance19_06", "1873"),
-            new Painting(7,"Ritmo Plastico", "Gino Severini", "renaissance19_07", "1913"),
-            new Painting(8,"Starry Night", "Vincent Van Gogh", "renaissance19_08", "1889"),
-            new Painting(9,"Der Schrei der Natur", "Edvard Munch", "renaissance19_09", "1893"),
-            new Painting(10,"The Trial", "Sidney Nolan", "renaissance19_10", "1947"),
+            new Painting(0,"1. Bicentennial Print", "Roy Lichtenstein", "renaissance19_00", "1975"),
+            new Painting(1,"2. Les Femmes d'Alger", "Pablo Picasso", "renaissance19_01", "1955"),
+            new Painting(2,"3. Tête de Clown", "Joseph Kutter", "renaissance19_02", "1937"),
+            new Painting(3,"4. Cavalli in riva al mare", "Giorgio de Chirico", "renaissance19_03", "1928"),
+            new Painting(4,"5. Kaleidoscope", "none", "renaissance19_04", "2102"),
+            new Painting(5,"6. Losanges", "none", "renaissance19_05", "2080"),
+            new Painting(6,"7. Coquelicots", "Claude Monet", "renaissance19_06", "1873"),
+            new Painting(7,"8. Ritmo Plastico", "Gino Severini", "renaissance19_07", "1913"),
+            new Painting(8,"9. La Nuit Etoilée", "Vincent Van Gogh", "renaissance19_08", "1889"),
+            new Painting(9,"10. Le Cri", "Edvard Munch", "renaissance19_09", "1893"),
+            new Painting(10,"11. The Trial", "Sidney Nolan", "renaissance19_10", "1947"),
 
             new Painting(101,"La Naissance de Vénus", "Botticelli", "renaissance19_101", "1485"),
             new Painting(102, "La Méduse", "Caravage", "renaissance19_102", "1598"),

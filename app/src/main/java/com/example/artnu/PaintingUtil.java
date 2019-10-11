@@ -27,7 +27,7 @@ public class PaintingUtil {
             new Painting(7,"8. Ritmo Plastico", "Gino Severini", "renaissance19_07", "1913"),
             new Painting(8,"9. La Nuit Etoilée", "Vincent Van Gogh", "renaissance19_08", "1889"),
             new Painting(9,"10. Le Cri", "Edvard Munch", "renaissance19_09", "1893"),
-            new Painting(10,"11. The Trial", "Sidney Nolan", "renaissance19_10", "1947"),
+            new Painting(10,"11. Le Procès", "Wolfgang Lettl", "renaissance19_10", "1981"),
 
             new Painting(101,"La Naissance de Vénus", "Botticelli", "renaissance19_101", "1485"),
             new Painting(102, "La Méduse", "Caravage", "renaissance19_102", "1598"),

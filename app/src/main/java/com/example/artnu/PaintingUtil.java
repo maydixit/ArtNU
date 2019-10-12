@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PaintingUtil {
+    private static final int DEFAULT = 2;
     private static List<Painting> paintings = Arrays.asList(
             new Painting(0,"1. Bicentennial Print", "Roy Lichtenstein", "renaissance19_00", "1975"),
             new Painting(1,"2. Les Femmes d'Alger", "Pablo Picasso", "renaissance19_01", "1955"),
@@ -105,7 +106,7 @@ public class PaintingUtil {
             Log.e("Exception", "File read failed: " + e.toString());
         }
         if (statusMap.size() == 0) {
-            statusMap.put(0, STATUS.UNLOCKED);
+            statusMap.put(DEFAULT, STATUS.UNLOCKED);
         }
     }
 
@@ -120,7 +121,7 @@ public class PaintingUtil {
     }
 
     static int readChoice(Context context) {
-        int choice = 0;
+        int choice = DEFAULT;
         try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.openFileInput("choice_artnu")));
             String receiveString = "";
@@ -128,7 +129,7 @@ public class PaintingUtil {
             while ((receiveString = bufferedReader.readLine()) != null) {
                 try {
                     choice = Integer.parseInt(receiveString);
-                    if (choice < 0) choice = 0;
+                    if (choice < 0) choice = DEFAULT;
                 }
                 catch (Exception e) {
                 }
